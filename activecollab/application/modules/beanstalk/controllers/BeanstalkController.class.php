@@ -29,7 +29,7 @@ class BeanstalkController extends ProjectController
  
 	function commit()
 	{
-		$varValue = file_get_contents("php://input");
+		$varValue = $this->request->post('commit');
 		
 		if ($varValue == '')
 		{

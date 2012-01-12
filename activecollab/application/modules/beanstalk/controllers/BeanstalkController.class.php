@@ -120,6 +120,12 @@ class BeanstalkController extends ProjectController
 			if (instance_of($objTicket, 'Ticket'))
 			{
 				$this->addComment($objTicket, $strDate, $strMessage, $objUser, $strAuthorName, $strAuthorEmail);
+				
+				// Complete ticket
+        		if (strpos($match[1], 'complete') !== false && instance_of($objUser, 'User'))
+        		{
+        			$objTicket->complete($objUser);
+        		}
 			}
 			
 			return;

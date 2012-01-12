@@ -105,7 +105,7 @@ class BeanstalkController extends ProjectController
 		
 		
 		// Commit Message (Ticket #15)
-		if (preg_match('/\(?(complete[d]?[\s]+)?ticket[\s]+[#]?(\d+):?\)?/is', $strMessage, $arrMatches))
+		if (preg_match('/\(?(complete[d|s]?[\s]+)?ticket[\s]+[#]?(\d+):?\)?/is', $strMessage, $arrMatches))
 		{
 			$strMessage = trim(str_replace($arrMatches[0], '', $strMessage));
 			

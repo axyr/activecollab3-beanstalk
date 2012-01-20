@@ -122,9 +122,9 @@ class BeanstalkController extends ProjectController
 				$this->addComment($objTicket, $strDate, $strMessage, $objUser, $strAuthorName, $strAuthorEmail);
 				
 				// Complete ticket
-        		if (strpos($match[1], 'complete') !== false && instance_of($objUser, 'User') && $objTicket->canChangeCompleteStatus($objUser))
+        		if (stripos($match[1], 'complete') !== false && instance_of($objUser, 'User') && $objTicket->canChangeCompleteStatus($objUser))
         		{
-        			$objTicket->complete($objUser);
+        			$objTicket->complete($objUser, $strMessage);
         		}
 			}
 			

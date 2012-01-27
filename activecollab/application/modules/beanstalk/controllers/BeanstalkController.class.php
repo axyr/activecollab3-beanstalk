@@ -61,6 +61,8 @@ class BeanstalkController extends ProjectController
 			$this->handle_commit((string) $objData->time, $strMessage, (string) $objData->author_email, (string) $objData->author_full_name);
 		}
 		
+		event_trigger('on_beanstalk_commit', array($objData));
+		
 		exit;
 	}
 	

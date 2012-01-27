@@ -60,6 +60,8 @@ class BeanstalkModule extends Module
 	function defineRoutes(&$router)
 	{
 		$router->map('beanstalk_commit', '/projects/:project_id/beanstalk/commit', array('controller'=>'beanstalk', 'action'=>'commit'), array('project_id'=>'\d+'));
+		$router->map('beanstalk_pre_deploy', '/projects/:project_id/beanstalk/pre_deploy', array('controller'=>'beanstalk', 'action'=>'pre_deploy'), array('project_id'=>'\d+'));
+		$router->map('beanstalk_post_deploy', '/projects/:project_id/beanstalk/post_deploy', array('controller'=>'beanstalk', 'action'=>'post_deploy'), array('project_id'=>'\d+'));
 	} 
 	
 	

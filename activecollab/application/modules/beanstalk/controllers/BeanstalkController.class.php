@@ -24,7 +24,7 @@ class BeanstalkController extends ProjectController
  	*
  	* @var array
  	*/
-	var $api_actions = array('commit');
+	var $api_actions = array('commit', 'pre_deploy', 'post_deploy');
 	
  
 	function commit()
@@ -62,6 +62,52 @@ class BeanstalkController extends ProjectController
 		}
 		
 		event_trigger('on_beanstalk_commit', array($objData));
+		
+		exit;
+	}
+	
+	
+	function pre_deploy()
+	{
+		$varValue = @file_get_contents('php://input');
+		
+		if ($varValue == '')
+		{
+			exit;
+		}
+		
+		$objData = json_decode($varValue);
+		
+		if (!is_object($objData))
+		{
+			header('HTTP/1.1 400 Bad Request');
+			die('HTTP/1.1 400 Bad Request');
+		}
+		
+		event_trigger('on_beanstalk_pre_deploy', array($objData));
+		
+		exit;
+	}
+	
+	
+	function post_deploy()
+	{
+		$varValue = @file_get_contents('php://input');
+		
+		if ($varValue == '')
+		{
+			exit;
+		}
+		
+		$objData = json_decode($varValue);
+		
+		if (!is_object($objData))
+		{
+			header('HTTP/1.1 400 Bad Request');
+			die('HTTP/1.1 400 Bad Request');
+		}
+		
+		event_trigger('on_beanstalk_post_deploy', array($objData));
 		
 		exit;
 	}

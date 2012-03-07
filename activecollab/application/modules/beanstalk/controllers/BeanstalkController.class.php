@@ -153,12 +153,12 @@ class BeanstalkController extends ProjectController
 		
 		
 		// Commit Message (Ticket #15)
-		if (preg_match('/\(?(complete[d|s]?[\s]+)?ticket[\s]+[#]?(\d+):?\)?/is', $strMessage, $arrMatches))
+		if (preg_match('/\(?((complete)[d|s]?[\s]+)?ticket[\s]+[#]?(\d+):?\)?/is', $strMessage, $arrMatches))
 		{
 			$strMessage = trim(str_replace($arrMatches[0], '', $strMessage));
 			
 			$objTicket = null;
-			$intTicket = (int) $arrMatches[2];
+			$intTicket = (int) $arrMatches[3];
 
 			if ($intTicket > 0)
 			{
@@ -170,9 +170,9 @@ class BeanstalkController extends ProjectController
 				$this->addComment($objTicket, $strDate, $strMessage, $objUser, $strAuthorName, $strAuthorEmail);
 				
 				// Complete ticket
-        		if (stripos($match[1], 'complete') !== false && instance_of($objUser, 'User') && $objTicket->canChangeCompleteStatus($objUser))
+        		if (strtolower($arrMatches[2]) == 'complete' && instance_of($objUser, 'User') && $objTicket->isOpen() && $objTicket->canChangeCompleteStatus($objUser))
         		{
-        			$objTicket->complete($objUser, $strMessage);
+					$objTicket->complete($objUser);
         		}
 			}
 			

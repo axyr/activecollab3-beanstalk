@@ -1,8 +1,7 @@
 ========================================
-Beanstalk Integration (v2) for ActiveCollab 2
+Beanstalk Integration (v3.0.2) for ActiveCollab 3
 ========================================
-
-This extension for ActiveCollab 2 will allow you to use post-commit hooks in Beanstalk and make comments (and updates) to your tickets.
+This extension for ActiveCollab 3 will allow you to use post-commit hooks in Beanstalk and make comments (and updates) to your tickets.
 
 ## Setup
 
@@ -10,10 +9,9 @@ This extension for ActiveCollab 2 will allow you to use post-commit hooks in Bea
 
 PHP 5.2 or at least the json_decode() function must be available. You can't install without it.
 
-
 #### Installation
 
-Upload both folders named "beanstalk" to the respective position in your ActiveCollab installation. Open the admin panel and install the module as usual.
+Upload folders named "beanstalk" to the respective position in your ActiveCollab installation. Open the admin panel and install the module as usual.
 
 
 ## Post-Commit Actions
@@ -23,9 +21,9 @@ Upload both folders named "beanstalk" to the respective position in your ActiveC
 1. Open your Beanstalk repository and go to setup => integrations => Web hooks
 2. Enter the URL to your AC installation like the example below
 
-		https://projects.example.com/api.php?path_info=/projects/${id}/beanstalk/commit&token=${api}
+		http://youractivecollab.com/public/api.php?path_info=/projects/#PROJECTID#/beanstalk/commit&auth_api_token=#TOKEN#
 
-3. Replace ${id} with the desired project ID, and ${api} with your API token (can be found in your user profile).
+3. Replace #PROJECTID# with the desired project ID, and #TOKEN# with your API token (can be found in your user profile).
 
 
 ### How It Works
@@ -70,11 +68,11 @@ Basic support for pre- and post-deployment hooks has been added. There is no fun
 
 	- for pre-deployment:
 
-			https://projects.example.com/api.php?path_info=/projects/${id}/beanstalk/pre_deploy&token=${api}
+			https://projects.example.com/public/api.php?path_info=/projects/${id}/beanstalk/pre_deploy&token=${api}
 
 	- for post-deployment:
 
-			https://projects.example.com/api.php?path_info=/projects/${id}/beanstalk/post_deploy&token=${api}
+			https://projects.example.com/public/api.php?path_info=/projects/${id}/beanstalk/post_deploy&token=${api}
 
 3. Replace ${id} with the desired project ID, and ${api} with your API token (can be found in your user profile).
 
